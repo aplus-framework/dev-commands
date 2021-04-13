@@ -15,7 +15,9 @@
 		}
 	],
 	"require": {
-		"php": ">=8.0"
+		"php": ">=8.0",
+		"natanfelles/cli": "^1.5",
+		"natanfelles/mvc": "^2.0"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
