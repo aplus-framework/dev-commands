@@ -1,7 +1,7 @@
-# Framework Sample Package
+# Framework CLI Commands Library
 
-- [Homepage](https://the-framework.gitlab.io/sample-package.html)
-- [API Documentation](https://the-framework.gitlab.io/sample-package/docs/)
+- [Homepage](https://the-framework.gitlab.io/libraries/cli-commands.html)
+- [API Documentation](https://the-framework.gitlab.io/libraries/cli-commands/docs/)
 
-[![Build](https://gitlab.com/the-framework/sample-package/badges/master/pipeline.svg)](https://gitlab.com/the-framework/sample-package/-/jobs)
-[![Coverage](https://gitlab.com/the-framework/sample-package/badges/master/coverage.svg?job=test:php)](https://the-framework.gitlab.io/sample-package/coverage/)
+[![Build](https://gitlab.com/the-framework/libraries/cli-commands/badges/master/pipeline.svg)](https://gitlab.com/the-framework/libraries/cli-commands/-/jobs)
+[![Coverage](https://gitlab.com/the-framework/libraries/cli-commands/badges/master/coverage.svg?job=test:php)](https://the-framework.gitlab.io/libraries/cli-commands/coverage/)

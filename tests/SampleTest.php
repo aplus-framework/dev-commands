@@ -1,6 +1,6 @@
-<?php namespace Tests\Sample;
+<?php namespace Tests\CLI\Commands;
 
-use Framework\Sample\Sample;
+use Framework\CLI\Commands\Sample;
 use PHPUnit\Framework\TestCase;
 
 class SampleTest extends TestCase
@@ -15,7 +15,7 @@ class SampleTest extends TestCase
 	public function testSample()
 	{
 		$this->assertEquals(
-			'Framework\Sample\Sample::test',
+			'Framework\CLI\Commands\Sample::test',
 			$this->sample->test()
 		);
 	}

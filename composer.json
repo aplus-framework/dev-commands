@@ -1,11 +1,12 @@
 {
-	"name": "natanfelles/sample-package",
-	"type": "project",
-	"description": "The Framework Sample package",
+	"name": "natanfelles/cli-commands",
+	"type": "library",
+	"description": "The Framework CLI Commands package",
 	"keywords": [
-		"sample-package"
+		"cli",
+		"commands"
 	],
-	"homepage": "https://the-framework.gitlab.io/sample-package.html",
+	"homepage": "https://the-framework.gitlab.io/libraries/cli-commands.html",
 	"license": "proprietary",
 	"authors": [
 		{
@@ -14,7 +15,7 @@
 		}
 	],
 	"require": {
-		"php": ">=7.4"
+		"php": ">=8.0"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
@@ -26,20 +27,14 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Framework\\Sample\\": "src/"
+			"Framework\\CLI\\Commands\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Tests\\Sample\\": "tests/"
+			"Tests\\CLI\\Commands\\": "tests/"
 		}
 	},
-	"repositories": [
-		{
-			"type": "composer",
-			"url": "https://the-framework.gitlab.io/satis/"
-		}
-	],
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"scripts": {
@@ -49,9 +44,9 @@
 	},
 	"support": {
 		"email": "natanfelles@gmail.com",
-		"issues": "https://gitlab.com/the-framework/sample-package/issues",
-		"wiki": "https://gitlab.com/the-framework/sample-package/wikis/home",
-		"source": "https://gitlab.com/the-framework/sample-package",
-		"docs": "https://the-framework.gitlab.io/sample-package/docs/"
+		"issues": "https://gitlab.com/the-framework/libraries/cli-commands/issues",
+		"wiki": "https://gitlab.com/the-framework/libraries/cli-commands/wikis/home",
+		"source": "https://gitlab.com/the-framework/libraries/cli-commands",
+		"docs": "https://the-framework.gitlab.io/libraries/cli-commands/docs/"
 	}
 }

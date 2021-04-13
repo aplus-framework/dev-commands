@@ -1,4 +1,4 @@
-<?php namespace Framework\Sample;
+<?php namespace Framework\CLI\Commands;
 
 class Sample
 {
