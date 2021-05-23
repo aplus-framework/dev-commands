@@ -1,4 +1,4 @@
-# Framework CLI Commands Library
+# The Framework CLI Commands Library
 
 - [Homepage](https://the-framework.gitlab.io/libraries/cli-commands.html)
 - [API Documentation](https://the-framework.gitlab.io/libraries/cli-commands/docs/)
