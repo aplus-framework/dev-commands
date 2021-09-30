@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of Aplus Framework CLI Commands Library.
  *
@@ -12,12 +12,16 @@ namespace Framework\CLI\Commands;
 use Framework\CLI\CLI;
 use Framework\CLI\Command;
 use Framework\MVC\App;
-use Framework\Routing\Route;
 
+/**
+ * Class Routes.
+ *
+ * @package cli-commands
+ */
 class Routes extends Command
 {
     protected string $name = 'routes';
-    protected string $description = 'Show routes list.';
+    protected string $description = 'Shows routes list.';
     protected string $usage = 'routes [options]';
     protected array $options = [
         '--order' => 'Order by column',
@@ -28,9 +32,6 @@ class Routes extends Command
         $body = [];
         foreach (App::router()->getRoutes() as $method => $routes) {
             foreach ($routes as $route) {
-                /**
-                 * @var Route $route
-                 */
                 $body[] = [
                     $method,
                     $route->getOrigin(),
@@ -40,8 +41,7 @@ class Routes extends Command
                 ];
             }
         }
-        $options = $this->console->getOptions();
-        $index = $options['order'] ?? 1;
+        $index = $this->console->getOption('order') ?? '1';
         \usort($body, static function ($str1, $str2) use ($index) {
             return \strcmp($str1[$index], $str2[$index]);
         });
