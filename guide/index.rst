@@ -1,6 +1,9 @@
 CLI Commands
 ============
 
+.. image:: image.png
+    :alt: Aplus Framework CLI Commands Library
+
 Aplus Framework CLI (Command-Line Interface) Commands Library.
 
 - `Installation`_
