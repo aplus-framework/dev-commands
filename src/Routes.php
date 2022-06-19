@@ -23,30 +23,98 @@ class Routes extends Command
     protected string $name = 'routes';
     protected string $description = 'Shows routes list.';
     protected string $usage = 'routes [options]';
-    protected array $options = [
-        '--order' => 'Order by column',
-    ];
+    protected string $routerInstance = 'default';
 
     public function run() : void
     {
-        $body = [];
-        foreach (App::router()->getRoutes() as $method => $routes) {
-            foreach ($routes as $route) {
-                $body[] = [
-                    $method,
-                    $route->getOrigin(),
-                    $route->getPath(),
-                    \is_string($route->getAction()) ? $route->getAction() : '{closure}',
-                    $route->getName() ?? '',
-                ];
+        $instance = $this->console->getArgument(0);
+        if ($instance !== null) {
+            $this->routerInstance = $instance;
+        }
+        CLI::write(
+            CLI::style('Router Instance:', CLI::FG_YELLOW, formats: [CLI::FM_BOLD])
+            . ' ' . $this->routerInstance
+        );
+        CLI::newLine();
+        $data = $this->collectData();
+        $count = \count($data);
+        if ($count === 0) {
+            CLI::write('No Route Collection has been set.', CLI::FG_RED);
+        } else {
+            $plural = $count > 1;
+            CLI::write(
+                'There ' . ($plural ? 'are' : 'is') . ' ' . $count
+                . ' Route Collection' . ($plural ? 's' : '') . ' set:',
+                CLI::FG_GREEN
+            );
+            CLI::newLine();
+        }
+        foreach ($data as $index => $collection) {
+            CLI::write(CLI::style('Route Collection ' . ($index + 1), CLI::FG_YELLOW, formats: [CLI::FM_BOLD]));
+            $this->writeHeader('Origin', $collection['origin']);
+            if (isset($collection['name'])) {
+                $this->writeHeader('Name', $collection['name']);
+            }
+            $this->writeHeader('Routes Count', (string) $collection['count']);
+            if (isset($collection['notFound'])) {
+                $this->writeHeader('Route Not Found', $collection['notFound']);
+            }
+            if ($collection['routes']) {
+                CLI::table(
+                    $collection['routes'],
+                    ['Method', 'Path', 'Action', 'Name', 'Has Options']
+                );
+            }
+            if ($index + 1 < $count) {
+                CLI::newLine();
             }
         }
-        $index = $this->console->getOption('order') ?? '1';
-        \usort($body, static function ($str1, $str2) use ($index) {
-            return \strcmp($str1[$index], $str2[$index]);
-        });
-        $titles = ['Method', 'Origin', 'Path', 'Action', 'Name'];
-        $titles[$index] = CLI::style($titles[$index], CLI::FG_WHITE, null, ['bold']);
-        CLI::table($body, $titles);
+    }
+
+    protected function writeHeader(string $field, string $value) : void
+    {
+        CLI::write(CLI::style($field . ':', formats: [CLI::FM_BOLD]) . ' ' . $value);
+    }
+
+    /**
+     * @return array<int,mixed>
+     */
+    protected function collectData() : array
+    {
+        $data = [];
+        foreach (App::router($this->routerInstance)->getCollections() as $index => $collection) {
+            $data[$index]['origin'] = $collection->origin;
+            $data[$index]['name'] = $collection->name;
+            $data[$index]['count'] = $collection->count();
+            $notFound = null;
+            if (isset($collection->notFoundAction)) {
+                $notFound = \is_string($collection->notFoundAction) // @phpstan-ignore-line
+                    ? $collection->notFoundAction // @phpstan-ignore-line
+                    : 'Closure';
+            }
+            $data[$index]['notFound'] = $notFound;
+            $data[$index]['routes'] = [];
+            foreach ($collection->routes as $method => $routes) {
+                foreach ($routes as $route) {
+                    $action = $route->getAction();
+                    $action = \is_string($action) ? $action : 'Closure';
+                    $data[$index]['routes'][] = [
+                        'method' => $method,
+                        'path' => $route->getPath(),
+                        'action' => $action,
+                        'name' => $route->getName(),
+                        'hasOptions' => $route->getOptions() ? 'Yes' : 'No',
+                    ];
+                }
+                \usort($data[$index]['routes'], static function ($str1, $str2) {
+                    $cmp = \strcmp($str1['path'], $str2['path']);
+                    if ($cmp === 0) {
+                        $cmp = \strcmp($str1['method'], $str2['method']);
+                    }
+                    return $cmp;
+                });
+            }
+        }
+        return $data;
     }
 }
