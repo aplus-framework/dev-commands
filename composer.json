@@ -38,7 +38,7 @@
         "aplus/testing": "dev-master",
         "ergebnis/composer-normalize": "^2.26",
         "phpmd/phpmd": "^2.12",
-        "phpstan/phpstan": "^0.12"
+        "phpstan/phpstan": "^1.7"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
