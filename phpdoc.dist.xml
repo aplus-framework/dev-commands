@@ -5,7 +5,7 @@
     xmlns="https://www.phpdoc.org"
     xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
 >
-    <title>Aplus Framework CLI Commands Library</title>
+    <title>Aplus Framework Dev Commands Library</title>
     <paths>
         <output>build/docs</output>
         <cache>build/docs-cache</cache>
@@ -16,7 +16,7 @@
             <source dsn=".">
                 <path>src</path>
             </source>
-            <default-package-name>cli-commands</default-package-name>
+            <default-package-name>dev-commands</default-package-name>
             <include-source>true</include-source>
         </api>
         <guide>

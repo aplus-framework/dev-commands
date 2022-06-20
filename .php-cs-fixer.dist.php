@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of Aplus Framework CLI Commands Library.
+ * This file is part of Aplus Framework Dev Commands Library.
  *
  * (c) Natan Felles <natanfelles@gmail.com>
  *
@@ -11,7 +11,7 @@ use Framework\CodingStandard\Config;
 use Framework\CodingStandard\Finder;
 
 return (new Config())->setDefaultHeaderComment(
-    'Aplus Framework CLI Commands Library',
+    'Aplus Framework Dev Commands Library',
     'Natan Felles <natanfelles@gmail.com>'
 )->setFinder(
     Finder::create()->in(__DIR__)

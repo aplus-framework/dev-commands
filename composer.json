@@ -1,6 +1,6 @@
 {
-    "name": "aplus/cli-commands",
-    "description": "Aplus Framework CLI Commands Library",
+    "name": "aplus/dev-commands",
+    "description": "Aplus Framework Dev Commands Library",
     "license": "MIT",
     "type": "library",
     "keywords": [
@@ -14,13 +14,13 @@
             "homepage": "https://natanfelles.github.io"
         }
     ],
-    "homepage": "https://aplus-framework.com/packages/cli-commands",
+    "homepage": "https://aplus-framework.com/packages/dev-commands",
     "support": {
         "email": "support@aplus-framework.com",
-        "issues": "https://gitlab.com/aplus-framework/libraries/cli-commands/issues",
+        "issues": "https://gitlab.com/aplus-framework/libraries/dev-commands/issues",
         "forum": "https://aplus-framework.com/forum",
-        "source": "https://gitlab.com/aplus-framework/libraries/cli-commands",
-        "docs": "https://docs.aplus-framework.com/guides/libraries/cli-commands/"
+        "source": "https://gitlab.com/aplus-framework/libraries/dev-commands",
+        "docs": "https://docs.aplus-framework.com/guides/libraries/dev-commands/"
     },
     "funding": [
         {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /*
- * This file is part of Aplus Framework CLI Commands Library.
+ * This file is part of Aplus Framework Dev Commands Library.
  *
  * (c) Natan Felles <natanfelles@gmail.com>
  *
