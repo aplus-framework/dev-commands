@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of Aplus Framework CLI Commands Library.
  *
@@ -11,87 +11,44 @@ namespace Framework\CLI\Commands;
 
 use Framework\CLI\CLI;
 use Framework\CLI\Command;
-use Framework\CLI\Console;
-use Framework\Database\Extra\Migrator;
 use Framework\MVC\App;
 
+/**
+ * Class AbstractMigration.
+ *
+ * @package cli-commands
+ */
 abstract class AbstractMigration extends Command
 {
-    protected array $options = [
-        '-l, --list' => 'List files.',
-        '-y, --yes' => 'Proceed migration without prompt.',
-    ];
+    protected string $migratorInstance = 'default';
 
-    public function __construct(Console $console)
+    protected function runMigration(string $direction, int | string $arg = null) : void
     {
-        parent::__construct($console);
-        $this->prepare();
-    }
-
-    protected function prepare() : void
-    {
-        $this->active = App::getConfig('console')['defaults'] ?? true;
-        $this->options['-l, --list'] = $this->console->getLanguage()
-            ->render('migrations', 'listFiles');
-        $this->options['-y, --yes'] = $this->console->getLanguage()
-            ->render('migrations', 'noPrompt');
-    }
-
-    public function run() : void
-    {
-        $migrator = new Migrator(App::database(), App::locator());
-        $this->showCurrentVersion($migrator);
-        $migrator->addFiles(
-            App::locator()->getFiles('Migrations')
-        );
-        $options = $this->console->getOptions();
-        if (isset($options['l'])) {
-            $this->listFiles($migrator);
+        $direction = \ucfirst(\strtolower($direction));
+        $arg ??= $this->getConsole()->getArgument(0);
+        if ($direction !== 'To') {
+            $arg = (int) $arg;
         }
-        if ( ! isset($options['y']) && ! $this->prompt()) {
-            return;
-        }
-        $this->migrate($migrator);
-        CLI::write($this->console->getLanguage()->render('migrations', 'migrationSucceed'));
-        $this->showCurrentVersion($migrator);
-    }
-
-    abstract protected function migrate(Migrator $migrator) : void;
-
-    protected function showCurrentVersion(Migrator $migrator) : void
-    {
+        $method = 'migrate' . $direction;
         CLI::write(
-            $this->console->getLanguage()
-                ->render('migrations', 'currentVersion', [
-                    $migrator->getCurrentVersion() ?: 0,
-                ])
+            CLI::style('Migrator Instance:', CLI::FG_YELLOW, formats: [CLI::FM_BOLD])
+            . ' ' . $this->migratorInstance
         );
-    }
-
-    protected function listFiles(Migrator $migrator) : void
-    {
-        CLI::write(
-            $this->console->getLanguage()->render('migrations', 'filesFound')
-        );
-        foreach ($migrator->getFiles() as $version => $file) {
-            $version = CLI::style($version, CLI::FG_YELLOW);
-            $file = CLI::style($file, CLI::FG_GREEN);
-            CLI::write(" {$version} - {$file}");
+        CLI::newLine();
+        $count = 0;
+        $time = $start = \microtime(true);
+        foreach (App::migrator($this->migratorInstance)->{$method}($arg) as $item) {
+            CLI::write('- Migrated to ' . CLI::style($item, CLI::FG_GREEN)
+                . ' in ' . CLI::style((string) \round(\microtime(true) - $time, 6), CLI::FG_YELLOW) . ' seconds.');
+            $time = \microtime(true);
+            $count++;
         }
-    }
-
-    protected function prompt() : bool
-    {
-        $prompt = CLI::prompt(
-            $this->console->getLanguage()->render('migrations', 'proceedMigration'),
-            ['n', 'y']
-        );
-        if ($prompt !== 'y') {
-            CLI::write(
-                $this->console->getLanguage()->render('migrations', 'migrationAborted')
-            );
-            return false;
+        if ($count) {
+            CLI::newLine();
+            CLI::write('Ran ' . $count . ' migration' . ($count !== 1 ? 's' : '')
+                . ' in ' . \round(\microtime(true) - $start, 6) . ' seconds.');
+        } else {
+            CLI::write('Did not run any migration.');
         }
-        return true;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of Aplus Framework CLI Commands Library.
  *
@@ -9,27 +9,17 @@
  */
 namespace Framework\CLI\Commands;
 
-use Framework\CLI\CLI;
-use Framework\Database\Extra\Migrator;
-
+/**
+ * Class MigrateUp.
+ *
+ * @package cli-commands
+ */
 class MigrateUp extends AbstractMigration
 {
-    protected string $name = 'migrate:up';
-    protected string $description = 'Run migrations up.';
-    protected string $usage = 'migrate:up';
+    protected string $description = 'Runs migrations up.';
 
-    protected function prepare() : void
+    public function run() : void
     {
-        parent::prepare();
-        $this->description = $this->console->getLanguage()->render('migrations', 'runUp');
-    }
-
-    protected function migrate(Migrator $migrator) : void
-    {
-        foreach ($migrator->migrateUp() as $version) {
-            CLI::write(
-                $this->console->getLanguage()->render('migrations', 'migratedToVersion', [$version])
-            );
-        }
+        $this->runMigration('up');
     }
 }
