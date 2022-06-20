@@ -47,8 +47,8 @@ abstract class AbstractMigration extends Command
             CLI::newLine();
             CLI::write('Ran ' . $count . ' migration' . ($count !== 1 ? 's' : '')
                 . ' in ' . \round(\microtime(true) - $start, 6) . ' seconds.');
-        } else {
-            CLI::write('Did not run any migration.');
+            return;
         }
+        CLI::write('Did not run any migration.');
     }
 }

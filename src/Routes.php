@@ -38,17 +38,7 @@ class Routes extends Command
         CLI::newLine();
         $data = $this->collectData();
         $count = \count($data);
-        if ($count === 0) {
-            CLI::write('No Route Collection has been set.', CLI::FG_RED);
-        } else {
-            $plural = $count > 1;
-            CLI::write(
-                'There ' . ($plural ? 'are' : 'is') . ' ' . $count
-                . ' Route Collection' . ($plural ? 's' : '') . ' set:',
-                CLI::FG_GREEN
-            );
-            CLI::newLine();
-        }
+        $this->showCollectionsSet($count);
         foreach ($data as $index => $collection) {
             CLI::write(CLI::style('Route Collection ' . ($index + 1), CLI::FG_YELLOW, formats: [CLI::FM_BOLD]));
             $this->writeHeader('Origin', $collection['origin']);
@@ -69,6 +59,21 @@ class Routes extends Command
                 CLI::newLine();
             }
         }
+    }
+
+    protected function showCollectionsSet(int $count) : void
+    {
+        if ($count === 0) {
+            CLI::write('No Route Collection has been set.', CLI::FG_RED);
+            return;
+        }
+        $plural = $count > 1;
+        CLI::write(
+            'There ' . ($plural ? 'are' : 'is') . ' ' . $count
+            . ' Route Collection' . ($plural ? 's' : '') . ' set:',
+            CLI::FG_GREEN
+        );
+        CLI::newLine();
     }
 
     protected function writeHeader(string $field, string $value) : void

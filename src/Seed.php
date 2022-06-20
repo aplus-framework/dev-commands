@@ -12,6 +12,7 @@ namespace Framework\CLI\Commands;
 use Framework\CLI\CLI;
 use Framework\CLI\Command;
 use Framework\MVC\App;
+use ReflectionMethod;
 
 class Seed extends Command
 {
@@ -41,7 +42,7 @@ class Seed extends Command
             CLI::error('First argument must be a class name.');
         }
         $class = new $class(App::database($this->databaseInstance));
-        $method = new \ReflectionMethod($class, 'runSeed');
+        $method = new ReflectionMethod($class, 'runSeed');
         $method->setAccessible(true);
         $method->invoke($class, $class);
     }
