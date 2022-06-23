@@ -24,6 +24,7 @@ abstract class AbstractMigration extends Command
 
     protected function runMigration(string $direction, int | string $arg = null) : void
     {
+        $this->migratorInstance = $this->getConsole()->getOption('instance') ?? 'default';
         $direction = \ucfirst(\strtolower($direction));
         $arg ??= $this->getConsole()->getArgument(0);
         if ($direction !== 'To') {
