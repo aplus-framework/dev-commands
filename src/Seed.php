@@ -20,9 +20,13 @@ class Seed extends Command
     protected string $description = 'Seeds database.';
     protected string $usage = 'seed [classname]';
     protected string $databaseInstance = 'default';
+    protected array $options = [
+        '--instance' => 'Database instance name.',
+    ];
 
     public function run() : void
     {
+        $this->databaseInstance = $this->getConsole()->getOption('instance') ?? 'default';
         CLI::write(
             CLI::style('Database Instance:', CLI::FG_YELLOW, formats: [CLI::FM_BOLD])
             . ' ' . $this->databaseInstance
