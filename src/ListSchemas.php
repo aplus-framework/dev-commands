@@ -11,7 +11,6 @@ namespace Framework\CLI\Commands;
 
 use Framework\CLI\CLI;
 use Framework\Debug\Debugger;
-use Framework\MVC\App;
 
 /**
  * Class ListSchemas.
@@ -24,7 +23,7 @@ class ListSchemas extends DatabaseCommand
 
     public function run() : void
     {
-        $this->setDatabase(App::database());
+        $this->setDatabase();
         $sql = 'SELECT `SCHEMA_NAME` AS `schema`,
 `DEFAULT_COLLATION_NAME` AS `collation`
 FROM `information_schema`.`SCHEMATA`

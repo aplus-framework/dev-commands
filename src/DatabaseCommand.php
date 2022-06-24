@@ -11,6 +11,7 @@ namespace Framework\CLI\Commands;
 
 use Framework\CLI\Command;
 use Framework\Database\Database;
+use Framework\MVC\App;
 
 /**
  * Class DatabaseCommand.
@@ -20,10 +21,15 @@ use Framework\Database\Database;
 abstract class DatabaseCommand extends Command
 {
     protected Database $database;
+    protected string $databaseInstance = 'default';
+    protected array $options = [
+        '--instance' => 'Database instance name.',
+    ];
 
-    public function setDatabase(Database $database) : static
+    public function setDatabase() : static
     {
-        $this->database = $database;
+        $this->databaseInstance = $this->getConsole()->getOption('instance') ?? 'default';
+        $this->database = App::database($this->databaseInstance);
         return $this;
     }
 

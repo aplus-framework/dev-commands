@@ -11,7 +11,6 @@ namespace Framework\CLI\Commands;
 
 use Framework\CLI\CLI;
 use Framework\Debug\Debugger;
-use Framework\MVC\App;
 
 /**
  * Class ShowSchema.
@@ -24,7 +23,7 @@ class ShowSchema extends DatabaseCommand
 
     public function run() : void
     {
-        $this->setDatabase(App::database());
+        $this->setDatabase();
         $schema = $this->console->getArgument(0);
         if (empty($schema)) {
             $schema = CLI::prompt('Enter a schema name');

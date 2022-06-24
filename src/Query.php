@@ -10,7 +10,6 @@
 namespace Framework\CLI\Commands;
 
 use Framework\CLI\CLI;
-use Framework\MVC\App;
 
 /**
  * Class Query.
@@ -23,7 +22,7 @@ class Query extends DatabaseCommand
 
     public function run() : void
     {
-        $this->setDatabase(App::database());
+        $this->setDatabase();
         $query = $this->console->getArgument(0);
         if (empty($query)) {
             $query = CLI::prompt('Query');

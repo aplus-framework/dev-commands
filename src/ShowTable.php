@@ -10,7 +10,6 @@
 namespace Framework\CLI\Commands;
 
 use Framework\CLI\CLI;
-use Framework\MVC\App;
 use stdClass;
 
 /**
@@ -24,7 +23,7 @@ class ShowTable extends DatabaseCommand
 
     public function run() : void
     {
-        $this->setDatabase(App::database());
+        $this->setDatabase();
         $table = $this->console->getArgument(0);
         if (empty($table)) {
             $table = CLI::prompt('Enter a table name');
