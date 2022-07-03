@@ -21,11 +21,13 @@ use Framework\MVC\App;
 class MigrationVersion extends Command
 {
     protected string $description = 'Shows last migration version name.';
+    protected string $migratorInstance = 'default';
 
     public function run() : void
     {
-        $name = App::migrator()->getLastMigrationName();
-        if ($name) {
+        $this->migratorInstance = $this->getConsole()->getOption('instance') ?? 'default';
+        $name = App::migrator($this->migratorInstance)->getLastMigrationName();
+        if ($name !== null) {
             CLI::write($name);
             return;
         }
