@@ -29,10 +29,6 @@ class ListSchemas extends DatabaseCommand
 FROM `information_schema`.`SCHEMATA`
 ORDER BY `SCHEMA_NAME`';
         $schemas = $this->getDatabase()->query($sql)->fetchArrayAll();
-        if ( ! $schemas) {
-            CLI::write('No database schema.');
-            return;
-        }
         $sql = 'SELECT `TABLE_SCHEMA` AS `schema`,
 SUM(`DATA_LENGTH` + `INDEX_LENGTH`) AS `size`,
 COUNT(DISTINCT CONCAT(`TABLE_SCHEMA`, ".", `TABLE_NAME`)) AS `tables`
