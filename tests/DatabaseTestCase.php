@@ -39,6 +39,13 @@ abstract class DatabaseTestCase extends TestCase
                     ],
                 ],
             ],
+            'migrator' => [
+                'default' => [
+                    'directories' => [
+                        __DIR__ . '/Migrations',
+                    ],
+                ],
+            ],
         ]);
         parent::prepareDefaults();
     }
@@ -80,6 +87,8 @@ abstract class DatabaseTestCase extends TestCase
     protected function dropTables() : void
     {
         $database = $this->getDatabase();
+        $database->dropTable('Migrations')->ifExists()->run();
+        $database->dropTable('Comments')->ifExists()->run();
         $database->dropTable('Posts')->ifExists()->run();
         $database->dropTable('Users')->ifExists()->run();
     }
