@@ -26,6 +26,7 @@ class Seed extends Command
 
     public function run() : void
     {
+        // @phpstan-ignore-next-line
         $this->databaseInstance = $this->getConsole()->getOption('instance') ?? 'default';
         CLI::write(
             CLI::style('Database Instance:', CLI::FG_YELLOW, formats: [CLI::FM_BOLD])

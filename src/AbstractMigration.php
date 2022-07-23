@@ -24,6 +24,7 @@ abstract class AbstractMigration extends Command
 
     protected function runMigration(string $direction, int | string $arg = null) : void
     {
+        // @phpstan-ignore-next-line
         $this->migratorInstance = $this->getConsole()->getOption('instance') ?? 'default';
         $direction = \ucfirst(\strtolower($direction));
         $arg ??= $this->getConsole()->getArgument(0);
@@ -38,6 +39,7 @@ abstract class AbstractMigration extends Command
         CLI::newLine();
         $count = 0;
         $time = $start = \microtime(true);
+        // @phpstan-ignore-next-line
         foreach (App::migrator($this->migratorInstance)->{$method}($arg) as $item) {
             CLI::write('- Migrated to ' . CLI::style($item, CLI::FG_GREEN)
                 . ' in ' . CLI::style((string) \round(\microtime(true) - $time, 6), CLI::FG_YELLOW) . ' seconds.');

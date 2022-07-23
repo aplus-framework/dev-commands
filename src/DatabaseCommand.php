@@ -28,8 +28,9 @@ abstract class DatabaseCommand extends Command
 
     public function setDatabase() : static
     {
+        // @phpstan-ignore-next-line
         $this->databaseInstance = $this->getConsole()->getOption('instance') ?? 'default';
-        $this->database = App::database($this->databaseInstance);
+        $this->database = App::database($this->databaseInstance); // @phpstan-ignore-line
         return $this;
     }
 
