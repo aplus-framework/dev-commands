@@ -14,6 +14,7 @@ use Framework\CLI\Command;
 use Framework\MVC\App;
 use Framework\Routing\Reflector;
 use Framework\Routing\RouteActions;
+use ReflectionClass;
 
 /**
  * Class MakeRoutes.
@@ -92,7 +93,8 @@ class MakeRoutes extends Command
             if ($className === null) {
                 continue;
             }
-            if (\is_subclass_of($className, RouteActions::class)) {
+            $class = new ReflectionClass($className); // @phpstan-ignore-line
+            if ($class->isInstantiable() && $class->isSubclassOf(RouteActions::class)) {
                 $actions[] = $className;
             }
         }
