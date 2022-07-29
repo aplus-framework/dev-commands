@@ -128,6 +128,22 @@ class MakeRoutes extends Command
                 $origins[$origin][] = $route;
             }
         }
+        return $this->sortOrigins($origins);
+    }
+
+    /**
+     * @param array<mixed> $origins
+     *
+     * @return array<mixed>
+     */
+    protected function sortOrigins(array $origins) : array
+    {
+        \ksort($origins);
+        if (isset($origins['null'])) {
+            $last = $origins['null'];
+            unset($origins['null']);
+            $origins['null'] = $last;
+        }
         return $origins;
     }
 }
