@@ -29,15 +29,28 @@ class MakeRoutes extends Command
 
     public function run() : void
     {
-        $contents = "<?php\n";
-        $contents .= "\n";
-        $contents .= "use Framework\\MVC\\App;\n";
-        $contents .= "use Framework\\Routing\\RouteCollection;\n";
-        $contents .= "\n";
-        $collections = $this->makeCollections();
-        $contents .= "App::router(){$collections}";
-        //file_put_contents(__DIR__ . '/routes.php', $contents);
-        CLI::write($contents);
+        $filepath = null;
+        $relativePath = $this->console->getArgument(0);
+        if ($relativePath !== null) {
+            $filepath = \getcwd() . '/' . \ltrim($relativePath, '/\\');
+        }
+        $contents = $this->getFileContents();
+        if ($filepath !== null) {
+            if ( ! $this->console->getOption('o') && \is_file($filepath)) {
+                $prompt = CLI::prompt('File already exists. Overwrite?', ['y', 'n']);
+                if ($prompt !== 'y') {
+                    CLI::write('Aborted.');
+                    return;
+                }
+            }
+            CLI::liveLine('Putting contents in ' . CLI::style($filepath, 'yellow') . '...');
+            \file_put_contents($filepath, $contents);
+            CLI::liveLine('Contents written in ' . CLI::style($filepath, 'yellow') . '.', true);
+        }
+        if ($filepath === null || $this->console->getOption('s')) {
+            CLI::write('File contents:', 'green');
+            CLI::write($contents);
+        }
     }
 
     protected function getFileContents() : string
