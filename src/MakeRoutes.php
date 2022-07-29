@@ -128,7 +128,11 @@ class MakeRoutes extends Command
                 $origins[$origin][] = $route;
             }
         }
-        return $this->sortOrigins($origins);
+        $origins = $this->sortOrigins($origins);
+        foreach ($origins as &$routes) {
+            $routes = $this->sortRoutes($routes);
+        }
+        return $origins;
     }
 
     /**
@@ -145,5 +149,22 @@ class MakeRoutes extends Command
             $origins['null'] = $last;
         }
         return $origins;
+    }
+
+    /**
+     * @param array<mixed> $routes
+     *
+     * @return array<mixed>
+     */
+    protected function sortRoutes(array $routes) : array
+    {
+        \usort($routes, static function ($route1, $route2) {
+            $cmp = \strcmp($route1['path'], $route2['path']);
+            if ($cmp === 0) {
+                $cmp = \strcmp($route1['methods'][0], $route2['methods'][0]);
+            }
+            return $cmp;
+        });
+        return $routes;
     }
 }
