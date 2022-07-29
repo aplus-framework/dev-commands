@@ -40,6 +40,18 @@ class MakeRoutes extends Command
         CLI::write($contents);
     }
 
+    protected function getFileContents() : string
+    {
+        $contents = "<?php\n";
+        $contents .= "\n";
+        $contents .= "use Framework\\MVC\\App;\n";
+        $contents .= "use Framework\\Routing\\RouteCollection;\n";
+        $contents .= "\n";
+        $collections = $this->makeCollections();
+        $contents .= "App::router(){$collections}";
+        return $contents;
+    }
+
     protected function makeCollections() : string
     {
         $contents = '';
