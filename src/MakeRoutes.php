@@ -33,11 +33,7 @@ class MakeRoutes extends Command
 
     public function run() : void
     {
-        $filepath = null;
-        $relativePath = $this->console->getArgument(0);
-        if ($relativePath !== null) {
-            $filepath = \getcwd() . '/' . \ltrim($relativePath, '/\\');
-        }
+        $filepath = $this->getFilepath();
         $contents = $this->getFileContents();
         if ($filepath !== null) {
             if ( ! $this->console->getOption('o') && \is_file($filepath)) {
@@ -55,6 +51,26 @@ class MakeRoutes extends Command
             CLI::write('File contents:', 'green');
             CLI::write($contents);
         }
+    }
+
+    /**
+     * Check if the filepath is absolute and return it or make it relative to
+     * the current working directory and return.
+     *
+     * @return string|null the filepath or null if it is not set
+     */
+    protected function getFilepath() : ?string
+    {
+        $filepath = $this->console->getArgument(0);
+        if ($filepath === null) {
+            return null;
+        }
+        if (\str_starts_with($filepath, '/')
+            || (isset($filepath[1]) && $filepath[1] === ':')
+        ) {
+            return $filepath;
+        }
+        return \getcwd() . \DIRECTORY_SEPARATOR . $filepath;
     }
 
     protected function getFileContents() : string
