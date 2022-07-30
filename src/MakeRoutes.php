@@ -25,7 +25,11 @@ class MakeRoutes extends Command
 {
     protected string $name = 'makeroutes';
     protected string $description = 'Make routes file.';
-    protected string $usage = 'makeroutes [options]';
+    protected string $usage = 'makeroutes [options] [filepath]';
+    protected array $options = [
+        '-o' => 'Overwrite the file if it exists.',
+        '-s' => 'Show file contents.',
+    ];
 
     public function run() : void
     {
