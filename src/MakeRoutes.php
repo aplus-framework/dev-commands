@@ -107,6 +107,7 @@ class MakeRoutes extends Command
                     $contents .= "    \$routes->{$method}('{$route['path']}', '{$route['action']}{$arguments}'{$name});\n";
                 }
             }
+            $contents .= $this->makeNotFoundPart($origin);
             $contents .= '})';
         }
         $contents .= ";\n";
@@ -213,5 +214,35 @@ class MakeRoutes extends Command
             return $cmp;
         });
         return $routes;
+    }
+
+    /**
+     * @return array<int,array<mixed>>
+     */
+    protected function getRoutesNotFound() : array
+    {
+        $classes = $this->getClasses();
+        $routes = [];
+        foreach ($classes as $class) {
+            $reflector = new Reflector($class); // @phpstan-ignore-line
+            $routes = [...$routes, ...$reflector->getRoutesNotFound()];
+        }
+        return $routes;
+    }
+
+    protected function makeNotFoundPart(string $origin) : string
+    {
+        $contents = '';
+        foreach ($this->getRoutesNotFound() as $routeNotFound) {
+            if ($origin === 'null' && empty($routeNotFound['origins'])) {
+                $contents .= "    \$routes->notFound('{$routeNotFound['action']}');\n";
+            }
+            foreach ($routeNotFound['origins'] as $notFoundOrigin) {
+                if ($origin === "'{$notFoundOrigin}'") {
+                    $contents .= "    \$routes->notFound('{$routeNotFound['action']}');\n";
+                }
+            }
+        }
+        return $contents;
     }
 }
