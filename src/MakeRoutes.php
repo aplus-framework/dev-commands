@@ -93,7 +93,7 @@ class MakeRoutes extends Command
                 $origin = "'{$origin}'";
             }
             $contents .= "->serve({$origin}, static function (RouteCollection \$routes) : void {\n";
-            foreach ($routes as $route) {
+            foreach ($routes['routes'] as $route) {
                 foreach ($route['methods'] as $method) {
                     $method = \strtolower($method);
                     $arguments = '';
@@ -107,7 +107,9 @@ class MakeRoutes extends Command
                     $contents .= "    \$routes->{$method}('{$route['path']}', '{$route['action']}{$arguments}'{$name});\n";
                 }
             }
-            $contents .= $this->makeNotFoundPart($origin);
+            foreach ($routes['routesNotFound'] as $routeNotFound) {
+                $contents .= "    \$routes->notFound('{$routeNotFound['action']}');\n";
+            }
             $contents .= '})';
         }
         $contents .= ";\n";
@@ -119,7 +121,6 @@ class MakeRoutes extends Command
      */
     protected function getClasses() : array
     {
-        //App::autoloader()->setNamespace('App', __DIR__ . '/../raw-tests/app');
         $autoloader = App::autoloader();
         $locator = App::locator();
         $files = [];
@@ -162,24 +163,42 @@ class MakeRoutes extends Command
     }
 
     /**
-     * @return array<array<mixed>>
+     * @return array<string,array<mixed>>
      */
     protected function getOrigins() : array
     {
         $origins = [];
         foreach ($this->getRoutes() as $route) {
             if (empty($route['origins'])) {
-                $origins['null'][] = $route;
+                $origins['null']['routes'][] = $route;
+                $origins['null']['routesNotFound'] = [];
                 continue;
             }
             foreach ($route['origins'] as $origin) {
-                $origins[$origin][] = $route;
+                $origins[$origin]['routes'][] = $route;
+                $origins[$origin]['routesNotFound'] = [];
+            }
+        }
+        foreach ($this->getRoutesNotFound() as $route) {
+            if (empty($route['origins'])) {
+                if ( ! isset($origins['null']['routes'])) {
+                    $origins['null']['routes'] = [];
+                }
+                $origins['null']['routesNotFound'][] = $route;
+                continue;
+            }
+            foreach ($route['origins'] as $origin) {
+                if ( ! isset($origins[$origin]['routes'])) {
+                    $origins[$origin]['routes'] = [];
+                }
+                $origins[$origin]['routesNotFound'][] = $route;
             }
         }
         $origins = $this->sortOrigins($origins);
         foreach ($origins as &$routes) {
-            $routes = $this->sortRoutes($routes);
+            $routes['routes'] = $this->sortRoutes($routes['routes']);
         }
+        unset($routes);
         return $origins;
     }
 
@@ -228,21 +247,5 @@ class MakeRoutes extends Command
             $routes = [...$routes, ...$reflector->getRoutesNotFound()];
         }
         return $routes;
-    }
-
-    protected function makeNotFoundPart(string $origin) : string
-    {
-        $contents = '';
-        foreach ($this->getRoutesNotFound() as $routeNotFound) {
-            if ($origin === 'null' && empty($routeNotFound['origins'])) {
-                $contents .= "    \$routes->notFound('{$routeNotFound['action']}');\n";
-            }
-            foreach ($routeNotFound['origins'] as $notFoundOrigin) {
-                if ($origin === "'{$notFoundOrigin}'") {
-                    $contents .= "    \$routes->notFound('{$routeNotFound['action']}');\n";
-                }
-            }
-        }
-        return $contents;
     }
 }
