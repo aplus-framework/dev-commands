@@ -16,7 +16,7 @@ use Framework\MVC\App;
 /**
  * Class AbstractMigration.
  *
- * @package cli-commands
+ * @package dev-commands
  */
 abstract class AbstractMigration extends Command
 {

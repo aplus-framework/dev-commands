@@ -15,7 +15,7 @@ use stdClass;
 /**
  * Class ShowTable.
  *
- * @package database
+ * @package dev-commands
  */
 class ShowTable extends DatabaseCommand
 {

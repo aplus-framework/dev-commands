@@ -16,7 +16,7 @@ use Framework\MVC\App;
 /**
  * Class MigrationVersion.
  *
- * @package cli-commands
+ * @package dev-commands
  */
 class MigrationVersion extends Command
 {

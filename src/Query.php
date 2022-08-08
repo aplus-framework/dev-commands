@@ -14,7 +14,7 @@ use Framework\CLI\CLI;
 /**
  * Class Query.
  *
- * @package database
+ * @package dev-commands
  */
 class Query extends DatabaseCommand
 {

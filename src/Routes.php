@@ -16,7 +16,7 @@ use Framework\MVC\App;
 /**
  * Class Routes.
  *
- * @package cli-commands
+ * @package dev-commands
  */
 class Routes extends Command
 {

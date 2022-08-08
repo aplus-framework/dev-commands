@@ -15,7 +15,7 @@ use Framework\Debug\Debugger;
 /**
  * Class ShowSchema.
  *
- * @package database
+ * @package dev-commands
  */
 class ShowSchema extends DatabaseCommand
 {

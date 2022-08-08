@@ -14,7 +14,7 @@ use Framework\CLI\CLI;
 /**
  * Class MigrateTo.
  *
- * @package cli-commands
+ * @package dev-commands
  */
 class MigrateTo extends AbstractMigration
 {

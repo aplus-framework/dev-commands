@@ -14,6 +14,11 @@ use Framework\CLI\Command;
 use Framework\MVC\App;
 use ReflectionMethod;
 
+/**
+ * Class Seed.
+ *
+ * @package dev-commands
+ */
 class Seed extends Command
 {
     protected string $name = 'seed';

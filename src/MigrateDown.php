@@ -12,7 +12,7 @@ namespace Framework\CLI\Commands;
 /**
  * Class MigrateDown.
  *
- * @package cli-commands
+ * @package dev-commands
  */
 class MigrateDown extends AbstractMigration
 {

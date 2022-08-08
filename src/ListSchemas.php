@@ -15,7 +15,7 @@ use Framework\Debug\Debugger;
 /**
  * Class ListSchemas.
  *
- * @package database
+ * @package dev-commands
  */
 class ListSchemas extends DatabaseCommand
 {

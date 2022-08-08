@@ -16,7 +16,7 @@ use Framework\MVC\App;
 /**
  * Class DatabaseCommand.
  *
- * @package database
+ * @package dev-commands
  */
 abstract class DatabaseCommand extends Command
 {
