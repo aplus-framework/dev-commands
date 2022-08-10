@@ -30,7 +30,7 @@ final class RoutesTest extends TestCase
             'router' => [
                 'default' => [
                     'files' => [
-                        __DIR__ . '/routes.php',
+                        __DIR__ . '/app/routes.php',
                     ],
                 ],
             ],
