@@ -52,7 +52,7 @@ class Routes extends Command
             if ($collection['routes']) {
                 CLI::table(
                     $collection['routes'],
-                    ['Method', 'Path', 'Action', 'Name', 'Has Options']
+                    ['#', 'Method', 'Path', 'Action', 'Name', 'Has Options']
                 );
             }
             if ($index + 1 < $count) {
@@ -112,13 +112,16 @@ class Routes extends Command
                     ];
                 }
                 \usort($data[$index]['routes'], static function ($str1, $str2) {
-                    $cmp = \strcmp($str1['path'], $str2['path']);
-                    if ($cmp === 0) {
-                        $cmp = \strcmp($str1['method'], $str2['method']);
-                    }
-                    return $cmp;
+                    return \strcmp($str1['method'], $str2['method']);
                 });
             }
+            $count = 0;
+            foreach ($data[$index]['routes'] as &$route) {
+                $route = \array_reverse($route);
+                $route['#'] = ++$count;
+                $route = \array_reverse($route);
+            }
+            unset($route);
         }
         return $data;
     }
