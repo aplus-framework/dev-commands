@@ -111,8 +111,8 @@ class Routes extends Command
                         'hasOptions' => $route->getOptions() ? 'Yes' : 'No',
                     ];
                 }
-                \usort($data[$index]['routes'], static function ($str1, $str2) {
-                    return \strcmp($str1['method'], $str2['method']);
+                \usort($data[$index]['routes'], static function ($route1, $route2) {
+                    return \strcmp($route1['method'], $route2['method']);
                 });
             }
             $count = 0;
