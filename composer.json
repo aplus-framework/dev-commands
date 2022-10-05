@@ -30,7 +30,7 @@
     ],
     "require": {
         "php": ">=8.1",
-        "aplus/mvc": "dev-master"
+        "aplus/mvc": "^3.0"
     },
     "require-dev": {
         "ext-xdebug": "*",
