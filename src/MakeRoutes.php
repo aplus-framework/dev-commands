@@ -36,7 +36,7 @@ class MakeRoutes extends Command
         $filepath = $this->getFilepath();
         $contents = $this->getFileContents();
         if ($filepath !== null) {
-            if ( ! $this->console->getOption('o') && \is_file($filepath)) {
+            if (!$this->console->getOption('o') && \is_file($filepath)) {
                 $prompt = CLI::prompt('File already exists. Overwrite?', ['y', 'n']);
                 if ($prompt !== 'y') {
                     CLI::write('Aborted.');
@@ -181,14 +181,14 @@ class MakeRoutes extends Command
         }
         foreach ($this->getRoutesNotFound() as $route) {
             if (empty($route['origins'])) {
-                if ( ! isset($origins['null']['routes'])) {
+                if (!isset($origins['null']['routes'])) {
                     $origins['null']['routes'] = [];
                 }
                 $origins['null']['routesNotFound'][] = $route;
                 continue;
             }
             foreach ($route['origins'] as $origin) {
-                if ( ! isset($origins[$origin]['routes'])) {
+                if (!isset($origins[$origin]['routes'])) {
                     $origins[$origin]['routes'] = [];
                 }
                 $origins[$origin]['routesNotFound'][] = $route;

@@ -171,7 +171,7 @@ class ShowTable extends DatabaseCommand
         $show = $this->getDatabase()->query(
             'SHOW CREATE TABLE ' . $this->getDatabase()->protectIdentifier($table)
         )->fetchArray();
-        if ( ! $show) {
+        if (!$show) {
             return [];
         }
         $createTable = $show['Create Table'];
@@ -193,15 +193,15 @@ class ShowTable extends DatabaseCommand
                 'database' => \str_replace('`', '', $match[4] !== '' ? $match[3] : $match[4]),
                 'table' => \str_replace('`', '', $match[4] !== '' ? $match[4] : $match[3]),
                 'field' => \str_replace('`', '', $target[0][0]),
-                'on_delete' => ( ! empty($match[6]) ? $match[6] : 'RESTRICT'),
-                'on_update' => ( ! empty($match[7]) ? $match[7] : 'RESTRICT'),
+                'on_delete' => (!empty($match[6]) ? $match[6] : 'RESTRICT'),
+                'on_update' => (!empty($match[7]) ? $match[7] : 'RESTRICT'),
             ];
         }
         $fks = [];
         foreach ($foreignKeys as $fk) {
             $fks[] = [
                 'Source' => $fk['source'],
-                'Target' => ( ! empty($fk['database']) ? $fk['database'] . '.' : '')
+                'Target' => (!empty($fk['database']) ? $fk['database'] . '.' : '')
                     . $fk['table'] . '(' . $fk['field'] . ')',
                 'ON DELETE' => $fk['on_delete'],
                 'ON UPDATE' => $fk['on_update'],
