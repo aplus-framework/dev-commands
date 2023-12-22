@@ -17,9 +17,9 @@
     "homepage": "https://aplus-framework.com/packages/dev-commands",
     "support": {
         "email": "support@aplus-framework.com",
-        "issues": "https://gitlab.com/aplus-framework/libraries/dev-commands/issues",
+        "issues": "https://github.com/aplus-framework/dev-commands/issues",
         "forum": "https://aplus-framework.com/forum",
-        "source": "https://gitlab.com/aplus-framework/libraries/dev-commands",
+        "source": "https://github.com/aplus-framework/dev-commands",
         "docs": "https://docs.aplus-framework.com/guides/libraries/dev-commands/"
     },
     "funding": [
