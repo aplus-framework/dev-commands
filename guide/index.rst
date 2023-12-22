@@ -1,10 +1,10 @@
-CLI Commands
+Dev Commands
 ============
 
 .. image:: image.png
-    :alt: Aplus Framework CLI Commands Library
+    :alt: Aplus Framework Dev Commands Library
 
-Aplus Framework CLI (Command-Line Interface) Commands Library.
+Aplus Framework Dev Commands Library.
 
 - `Installation`_
 
@@ -15,4 +15,4 @@ The installation of this library can be done with Composer:
 
 .. code-block::
 
-    composer require aplus/cli-commands
+    composer require aplus/dev-commands
