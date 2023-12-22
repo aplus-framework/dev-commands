@@ -34,8 +34,8 @@
     },
     "require-dev": {
         "ext-xdebug": "*",
-        "aplus/coding-standard": "^1.12",
-        "aplus/testing": "^1.0",
+        "aplus/coding-standard": "^2.1",
+        "aplus/testing": "^2.0",
         "ergebnis/composer-normalize": "^2.26",
         "phpmd/phpmd": "^2.12",
         "phpstan/phpstan": "^1.7"
