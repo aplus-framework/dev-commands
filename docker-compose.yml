@@ -2,7 +2,7 @@ version: "3"
 services:
   package:
     image: registry.gitlab.com/aplus-framework/images/package:4
-    container_name: package-cli-commands
+    container_name: package-dev-commands
     working_dir: /package
     volumes:
       - .:/package
@@ -11,7 +11,7 @@ services:
     tty: true
   package-latest:
     image: registry.gitlab.com/aplus-framework/images/package:latest
-    container_name: package-cli-commands-latest
+    container_name: package-dev-commands-latest
     working_dir: /package
     volumes:
       - .:/package
