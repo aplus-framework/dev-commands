@@ -75,7 +75,7 @@ class ShowTable extends DatabaseCommand
         $columns = [];
         foreach ($show as $row) {
             \preg_match(
-                '~^([^( ]+)(?:\\((.+)\\))?( unsigned)?( zerofill)?$~',
+                '~^([^( ]+)(?:\((.+)\))?( unsigned)?( zerofill)?$~',
                 $row['Type'],
                 $match
             );
