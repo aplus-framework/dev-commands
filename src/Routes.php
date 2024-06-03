@@ -32,7 +32,7 @@ class Routes extends Command
             $this->routerInstance = $instance;
         }
         CLI::write(
-            CLI::style('Router Instance:', CLI::FG_YELLOW, formats: [CLI::FM_BOLD])
+            CLI::style('Router Instance:', 'yellow', formats: ['bold'])
             . ' ' . $this->routerInstance
         );
         CLI::newLine();
@@ -40,7 +40,7 @@ class Routes extends Command
         $count = \count($data);
         $this->showCollectionsSet($count);
         foreach ($data as $index => $collection) {
-            CLI::write(CLI::style('Route Collection ' . ($index + 1), CLI::FG_YELLOW, formats: [CLI::FM_BOLD]));
+            CLI::write(CLI::style('Route Collection ' . ($index + 1), 'yellow', formats: ['bold']));
             $this->writeHeader('Origin', $collection['origin']);
             if (isset($collection['name'])) {
                 $this->writeHeader('Name', $collection['name']);
@@ -64,21 +64,21 @@ class Routes extends Command
     protected function showCollectionsSet(int $count) : void
     {
         if ($count === 0) {
-            CLI::write('No Route Collection has been set.', CLI::FG_RED);
+            CLI::write('No Route Collection has been set.', 'red');
             return;
         }
         $plural = $count > 1;
         CLI::write(
             'There ' . ($plural ? 'are' : 'is') . ' ' . $count
             . ' Route Collection' . ($plural ? 's' : '') . ' set:',
-            CLI::FG_GREEN
+            'green'
         );
         CLI::newLine();
     }
 
     protected function writeHeader(string $field, string $value) : void
     {
-        CLI::write(CLI::style($field . ':', formats: [CLI::FM_BOLD]) . ' ' . $value);
+        CLI::write(CLI::style($field . ':', formats: ['bold']) . ' ' . $value);
     }
 
     /**
