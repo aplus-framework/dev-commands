@@ -24,6 +24,7 @@ class Routes extends Command
     protected string $description = 'Shows routes list.';
     protected string $usage = 'routes [options]';
     protected string $routerInstance = 'default';
+    protected string $group = 'Routing';
 
     public function run() : void
     {

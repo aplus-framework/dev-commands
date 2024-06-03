@@ -25,6 +25,7 @@ abstract class DatabaseCommand extends Command
     protected array $options = [
         '--instance' => 'Database instance name.',
     ];
+    protected string $group = 'Database';
 
     public function setDatabase() : static
     {

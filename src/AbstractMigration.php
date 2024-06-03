@@ -21,6 +21,7 @@ use Framework\MVC\App;
 abstract class AbstractMigration extends Command
 {
     protected string $migratorInstance = 'default';
+    protected string $group = 'Migrations';
 
     protected function runMigration(string $direction, int | string $arg = null) : void
     {
