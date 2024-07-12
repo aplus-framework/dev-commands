@@ -9,9 +9,9 @@
  */
 namespace Tests\CLI\Commands;
 
-/**
- * @runTestsInSeparateProcesses
- */
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+#[RunTestsInSeparateProcesses]
 final class MigrateToTest extends MigrationTestCase
 {
     public function testRunUp() : void

@@ -11,10 +11,9 @@ namespace Tests\CLI\Commands;
 
 use Framework\Config\Config;
 use Framework\Testing\TestCase;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
-/**
- * @runTestsInSeparateProcesses
- */
+#[RunTestsInSeparateProcesses]
 final class MakeRoutesTest extends TestCase
 {
     protected function prepareDefaults() : void

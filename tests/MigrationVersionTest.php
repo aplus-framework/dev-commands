@@ -9,9 +9,9 @@
  */
 namespace Tests\CLI\Commands;
 
-/**
- * @runTestsInSeparateProcesses
- */
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+#[RunTestsInSeparateProcesses]
 final class MigrationVersionTest extends MigrationTestCase
 {
     public function testNoVersion() : void

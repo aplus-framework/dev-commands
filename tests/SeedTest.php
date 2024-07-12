@@ -9,9 +9,9 @@
  */
 namespace Tests\CLI\Commands;
 
-/**
- * @runTestsInSeparateProcesses
- */
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+#[RunTestsInSeparateProcesses]
 final class SeedTest extends DatabaseTestCase
 {
     public function testRun() : void
