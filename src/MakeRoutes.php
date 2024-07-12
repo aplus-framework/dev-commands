@@ -30,6 +30,7 @@ class MakeRoutes extends Command
         '-o' => 'Overwrite the file if it exists.',
         '-s' => 'Show file contents.',
     ];
+    protected string $group = 'Routing';
 
     public function run() : void
     {

@@ -21,6 +21,7 @@ use Framework\MVC\App;
 abstract class AbstractMigration extends Command
 {
     protected string $migratorInstance = 'default';
+    protected string $group = 'Migrations';
 
     protected function runMigration(string $direction, int | string $arg = null) : void
     {
@@ -33,7 +34,7 @@ abstract class AbstractMigration extends Command
         }
         $method = 'migrate' . $direction;
         CLI::write(
-            CLI::style('Migrator Instance:', CLI::FG_YELLOW, formats: [CLI::FM_BOLD])
+            CLI::style('Migrator Instance:', 'yellow', formats: ['bold'])
             . ' ' . $this->migratorInstance
         );
         CLI::newLine();
@@ -41,8 +42,8 @@ abstract class AbstractMigration extends Command
         $time = $start = \microtime(true);
         // @phpstan-ignore-next-line
         foreach (App::migrator($this->migratorInstance)->{$method}($arg) as $item) {
-            CLI::write('- Migrated to ' . CLI::style($item, CLI::FG_GREEN)
-                . ' in ' . CLI::style((string) \round(\microtime(true) - $time, 6), CLI::FG_YELLOW) . ' seconds.');
+            CLI::write('- Migrated to ' . CLI::style($item, 'green')
+                . ' in ' . CLI::style((string) \round(\microtime(true) - $time, 6), 'yellow') . ' seconds.');
             $time = \microtime(true);
             $count++;
         }

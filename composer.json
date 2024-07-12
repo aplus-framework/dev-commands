@@ -29,13 +29,13 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
-        "aplus/mvc": "^3.0"
+        "php": ">=8.3",
+        "aplus/mvc": "^4.0"
     },
     "require-dev": {
         "ext-xdebug": "*",
         "aplus/coding-standard": "^2.1",
-        "aplus/testing": "^2.0",
+        "aplus/testing": "^3.0",
         "ergebnis/composer-normalize": "^2.26",
         "phpmd/phpmd": "^2.12",
         "phpstan/phpstan": "^1.7"

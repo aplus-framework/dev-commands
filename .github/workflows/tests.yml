@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 10
 
-    strategy:
-      fail-fast: true
-
     services:
       mariadb:
         image: mariadb
@@ -26,16 +23,16 @@ jobs:
           - 3306:3306
         options: --health-cmd="healthcheck.sh --su-mysql --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
 
-    name: PHP 8.1 - MariaDB
+    name: PHP 8.3 - MariaDB
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.3
           ini-values: mysqli.allow_local_infile=On
           tools: composer
           coverage: xdebug
@@ -78,9 +75,6 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 10
 
-    strategy:
-      fail-fast: true
-
     services:
       mariadb:
         image: mariadb
@@ -97,7 +91,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

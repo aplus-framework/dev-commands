@@ -28,13 +28,14 @@ class Seed extends Command
     protected array $options = [
         '--instance' => 'Database instance name.',
     ];
+    protected string $group = 'Database';
 
     public function run() : void
     {
         // @phpstan-ignore-next-line
         $this->databaseInstance = $this->getConsole()->getOption('instance') ?? 'default';
         CLI::write(
-            CLI::style('Database Instance:', CLI::FG_YELLOW, formats: [CLI::FM_BOLD])
+            CLI::style('Database Instance:', 'yellow', formats: ['bold'])
             . ' ' . $this->databaseInstance
         );
         CLI::newLine();

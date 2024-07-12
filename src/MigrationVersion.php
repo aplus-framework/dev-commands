@@ -22,6 +22,7 @@ class MigrationVersion extends Command
 {
     protected string $description = 'Shows last migration version name.';
     protected string $migratorInstance = 'default';
+    protected string $group = 'Migrations';
 
     public function run() : void
     {
