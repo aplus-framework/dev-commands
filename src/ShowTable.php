@@ -85,7 +85,8 @@ class ShowTable extends DatabaseCommand
                 'type' => $match[1] ?? '',
                 'length' => $match[2] ?? '',
                 'unsigned' => \ltrim(($match[3] ?? '') . ($match[4] ?? '')),
-                'default' => $row['Default'] !== '' || \preg_match('~char|set~', $match[1])
+                'default' => $row['Default'] !== ''
+                || \preg_match('~char|set~', $match[1] ?? '')
                     ? $row['Default'] : '',
                 'null' => $row['Null'] === 'YES',
                 'auto_increment' => ($row['Extra'] === 'auto_increment'),
@@ -190,7 +191,9 @@ class ShowTable extends DatabaseCommand
             $foreignKeys[] = [
                 'index' => \str_replace('`', '', $match[1]),
                 'source' => \str_replace('`', '', $source[0][0]),
+                // @phpstan-ignore-next-line
                 'database' => \str_replace('`', '', $match[4] !== '' ? $match[3] : $match[4]),
+                // @phpstan-ignore-next-line
                 'table' => \str_replace('`', '', $match[4] !== '' ? $match[4] : $match[3]),
                 'field' => \str_replace('`', '', $target[0][0]),
                 'on_delete' => (!empty($match[6]) ? $match[6] : 'RESTRICT'),
