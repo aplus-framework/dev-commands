@@ -21,6 +21,7 @@
         <env name="DB_USERNAME" value="root"/>
         <env name="DB_PASSWORD" value="password"/>
         <env name="DB_SCHEMA" value="framework-tests"/>
+        <const name="IS_IN_PHPUNIT" value="true"/>
     </php>
     <source>
         <include>
