@@ -133,6 +133,9 @@ class MakeRoutes extends Command
         foreach ($autoloader->getClasses() as $file) {
             $files[] = $file;
         }
+        /**
+         * @var array<string>
+         */
         $files = \array_unique($files);
         \sort($files);
         $actions = [];

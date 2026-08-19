@@ -28,7 +28,6 @@ class MigrationVersion extends Command
     {
         // @phpstan-ignore-next-line
         $this->migratorInstance = $this->getConsole()->getOption('instance') ?? 'default';
-        // @phpstan-ignore-next-line
         $name = App::migrator($this->migratorInstance)->getLastMigrationName();
         if ($name !== null) {
             CLI::write($name);

@@ -14,7 +14,7 @@ use Framework\Routing\Attributes\Origin;
 use Framework\Routing\Attributes\RouteNotFound;
 
 #[Origin('https://domain.tld')]
-#[Origin('https://blog.domain.tld')] // @phpstan-ignore-line
+#[Origin('https://blog.domain.tld')]
 class Errors extends Controller
 {
     #[RouteNotFound]

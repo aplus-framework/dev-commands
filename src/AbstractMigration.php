@@ -40,7 +40,6 @@ abstract class AbstractMigration extends Command
         CLI::newLine();
         $count = 0;
         $time = $start = \microtime(true);
-        // @phpstan-ignore-next-line
         foreach (App::migrator($this->migratorInstance)->{$method}($arg) as $item) {
             CLI::write('- Migrated to ' . CLI::style($item, 'green')
                 . ' in ' . CLI::style((string) \round(\microtime(true) - $time, 6), 'yellow') . ' seconds.');

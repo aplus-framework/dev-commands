@@ -104,6 +104,7 @@ class Routes extends Command
                 foreach ($routes as $route) {
                     $action = $route->getAction();
                     $action = \is_string($action) ? $action : 'Closure';
+                    // @phpstan-ignore-next-line
                     $data[$index]['routes'][] = [
                         'method' => $method,
                         'path' => $route->getPath(),
@@ -112,6 +113,7 @@ class Routes extends Command
                         'hasOptions' => $route->getOptions() ? 'Yes' : 'No',
                     ];
                 }
+                // @phpstan-ignore-next-line
                 \usort($data[$index]['routes'], static function ($route1, $route2) {
                     return \strcmp($route1['method'], $route2['method']);
                 });

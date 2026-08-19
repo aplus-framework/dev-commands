@@ -31,7 +31,7 @@ abstract class DatabaseCommand extends Command
     {
         // @phpstan-ignore-next-line
         $this->databaseInstance = $this->getConsole()->getOption('instance') ?? 'default';
-        $this->database = App::database($this->databaseInstance); // @phpstan-ignore-line
+        $this->database = App::database($this->databaseInstance);
         return $this;
     }
 
