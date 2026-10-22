@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 #[RunTestsInSeparateProcesses]
 final class MergeConfigsTest extends TestCase
 {
-    protected function prepareDefaults() : void
+    public function prepareDefaults() : void
     {
         $this->config = new Config([
             'console' => [

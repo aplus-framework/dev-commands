@@ -18,7 +18,7 @@ abstract class DatabaseTestCase extends TestCase
 {
     protected static Database $database;
 
-    protected function prepareDefaults() : void
+    public function prepareDefaults() : void
     {
         $this->config = new Config([
             'console' => [
@@ -53,11 +53,11 @@ abstract class DatabaseTestCase extends TestCase
     protected function getDatabase() : Database
     {
         return static::$database ??= new Database([
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-            'username' => \getenv('DB_USERNAME'),
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
+            'host' => (string) \getenv('DB_HOST'),
+            'port' => (int) \getenv('DB_PORT'),
+            'username' => (string) \getenv('DB_USERNAME'),
+            'password' => (string) \getenv('DB_PASSWORD'),
+            'schema' => (string) \getenv('DB_SCHEMA'),
         ]);
     }
 

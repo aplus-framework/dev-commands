@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 #[RunTestsInSeparateProcesses]
 final class MakeRoutesTest extends TestCase
 {
-    protected function prepareDefaults() : void
+    public function prepareDefaults() : void
     {
         $this->config = new Config([
             'console' => [
@@ -35,8 +35,8 @@ final class MakeRoutesTest extends TestCase
         return <<<'EOL'
             <?php
 
-            use Framework\MVC\App;
-            use Framework\Routing\RouteCollection;
+            use Aplus\Mvc\App;
+            use Aplus\Routing\RouteCollection;
 
             App::router();
             EOL;
@@ -95,7 +95,7 @@ final class MakeRoutesTest extends TestCase
             'namespaces' => [
             ],
             'classes' => [
-                'Tests\CLI\Commands\app\Other\Bar' => __DIR__ . '/app/Other/Bar.php',
+                'Tests\Cli\Commands\app\Other\Bar' => __DIR__ . '/app/Other/Bar.php',
             ],
         ]);
         $this->app->runCli('makeroutes');
@@ -103,11 +103,11 @@ final class MakeRoutesTest extends TestCase
             <<<'EOL'
                 <?php
 
-                use Framework\MVC\App;
-                use Framework\Routing\RouteCollection;
+                use Aplus\Mvc\App;
+                use Aplus\Routing\RouteCollection;
 
                 App::router()->serve(null, static function (RouteCollection $routes) : void {
-                    $routes->notFound('Tests\CLI\Commands\app\Other\Bar::notFound');
+                    $routes->notFound('Tests\Cli\Commands\app\Other\Bar::notFound');
                 });
                 EOL
         );
@@ -119,7 +119,7 @@ final class MakeRoutesTest extends TestCase
             'namespaces' => [
             ],
             'classes' => [
-                'Tests\CLI\Commands\app\Other\Foo' => __DIR__ . '/app/Other/Foo.php',
+                'Tests\Cli\Commands\app\Other\Foo' => __DIR__ . '/app/Other/Foo.php',
             ],
         ]);
         $this->app->runCli('makeroutes');
@@ -127,13 +127,13 @@ final class MakeRoutesTest extends TestCase
             <<<'EOL'
                 <?php
 
-                use Framework\MVC\App;
-                use Framework\Routing\RouteCollection;
+                use Aplus\Mvc\App;
+                use Aplus\Routing\RouteCollection;
 
                 App::router()->serve(null, static function (RouteCollection $routes) : void {
-                    $routes->get('/foo', 'Tests\CLI\Commands\app\Other\Foo::index/*');
-                    $routes->post('/foo', 'Tests\CLI\Commands\app\Other\Foo::create/*', 'foo.create');
-                    $routes->notFound('Tests\CLI\Commands\app\Other\Foo::notFound');
+                    $routes->get('/foo', 'Tests\Cli\Commands\app\Other\Foo::index/*');
+                    $routes->post('/foo', 'Tests\Cli\Commands\app\Other\Foo::create/*', 'foo.create');
+                    $routes->notFound('Tests\Cli\Commands\app\Other\Foo::notFound');
                 });
                 EOL
         );
@@ -143,10 +143,10 @@ final class MakeRoutesTest extends TestCase
     {
         $this->config->set('autoloader', [
             'namespaces' => [
-                'Tests\CLI\Commands\app\Controllers' => __DIR__ . '/app/Controllers',
+                'Tests\Cli\Commands\app\Controllers' => __DIR__ . '/app/Controllers',
             ],
             'classes' => [
-                'Tests\CLI\Commands\app\Other\Foo' => __DIR__ . '/app/Other/Foo.php',
+                'Tests\Cli\Commands\app\Other\Foo' => __DIR__ . '/app/Other/Foo.php',
             ],
         ]);
         $this->app->runCli('makeroutes');
@@ -154,20 +154,20 @@ final class MakeRoutesTest extends TestCase
             <<<'EOL'
                 <?php
 
-                use Framework\MVC\App;
-                use Framework\Routing\RouteCollection;
+                use Aplus\Mvc\App;
+                use Aplus\Routing\RouteCollection;
 
                 App::router()->serve('https://blog.domain.tld', static function (RouteCollection $routes) : void {
-                    $routes->notFound('Tests\CLI\Commands\app\Controllers\Errors::notFound');
+                    $routes->notFound('Tests\Cli\Commands\app\Controllers\Errors::notFound');
                 })->serve('https://domain.tld', static function (RouteCollection $routes) : void {
-                    $routes->get('/', 'Tests\CLI\Commands\app\Controllers\Home::index/*', 'home');
-                    $routes->get('/contact', 'Tests\CLI\Commands\app\Controllers\Home::contact/*');
-                    $routes->post('/contact', 'Tests\CLI\Commands\app\Controllers\Home::contact/*');
-                    $routes->notFound('Tests\CLI\Commands\app\Controllers\Errors::notFound');
+                    $routes->get('/', 'Tests\Cli\Commands\app\Controllers\Home::index/*', 'home');
+                    $routes->get('/contact', 'Tests\Cli\Commands\app\Controllers\Home::contact/*');
+                    $routes->post('/contact', 'Tests\Cli\Commands\app\Controllers\Home::contact/*');
+                    $routes->notFound('Tests\Cli\Commands\app\Controllers\Errors::notFound');
                 })->serve(null, static function (RouteCollection $routes) : void {
-                    $routes->get('/foo', 'Tests\CLI\Commands\app\Other\Foo::index/*');
-                    $routes->post('/foo', 'Tests\CLI\Commands\app\Other\Foo::create/*', 'foo.create');
-                    $routes->notFound('Tests\CLI\Commands\app\Other\Foo::notFound');
+                    $routes->get('/foo', 'Tests\Cli\Commands\app\Other\Foo::index/*');
+                    $routes->post('/foo', 'Tests\Cli\Commands\app\Other\Foo::create/*', 'foo.create');
+                    $routes->notFound('Tests\Cli\Commands\app\Other\Foo::notFound');
                 });
                 EOL
         );
