@@ -44,12 +44,12 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Framework\\CLI\\Commands\\": "src/"
+            "Aplus\\Cli\\Commands\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\CLI\\Commands\\": "tests/"
+            "Tests\\Cli\\Commands\\": "tests/"
         }
     },
     "config": {
