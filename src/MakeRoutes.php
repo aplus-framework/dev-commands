@@ -78,8 +78,8 @@ class MakeRoutes extends Command
     {
         $contents = "<?php\n";
         $contents .= "\n";
-        $contents .= "use Framework\\MVC\\App;\n";
-        $contents .= "use Framework\\Routing\\RouteCollection;\n";
+        $contents .= "use Aplus\\Mvc\\App;\n";
+        $contents .= "use Aplus\\Routing\\RouteCollection;\n";
         $contents .= "\n";
         $collections = $this->makeCollections();
         $contents .= "App::router(){$collections}";
