@@ -7,11 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\Command;
-use Framework\Database\Database;
-use Framework\MVC\App;
+use Aplus\Cli\Command;
+use Aplus\Database\Database;
+use Aplus\Mvc\App;
 
 /**
  * Class DatabaseCommand.

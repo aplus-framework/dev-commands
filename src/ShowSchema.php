@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
-use Framework\Debug\Debugger;
+use Aplus\Cli\Cli;
+use Aplus\Debug\Debugger;
 
 /**
  * Class ShowSchema.
@@ -26,27 +26,27 @@ class ShowSchema extends DatabaseCommand
         $this->setDatabase();
         $schema = $this->console->getArgument(0);
         if (empty($schema)) {
-            $schema = CLI::prompt('Enter a schema name');
-            CLI::newLine();
+            $schema = Cli::prompt('Enter a schema name');
+            Cli::newLine();
         }
         $show = $this->getDatabase()->query(
             'SHOW DATABASES LIKE ' . $this->getDatabase()->quote($schema)
         )->fetchArray();
         if (empty($show)) {
-            CLI::beep();
-            CLI::error('Schema not found: ' . $schema);
+            Cli::beep();
+            Cli::error('Schema not found: ' . $schema);
             return;
         }
         $list = $this->getTableList($schema);
         if ($list) {
-            CLI::write(
-                CLI::style('Schema: ', 'white') . CLI::style($schema, 'yellow')
+            Cli::write(
+                Cli::style('Schema: ', 'white') . Cli::style($schema, 'yellow')
             );
-            CLI::table($list, \array_keys($list[0]));
-            CLI::write('Total: ' . \count($list));
+            Cli::table($list, \array_keys($list[0]));
+            Cli::write('Total: ' . \count($list));
             return;
         }
-        CLI::write('No tables.');
+        Cli::write('No tables.');
     }
 
     /**

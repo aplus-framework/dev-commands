@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Tests\CLI\Commands\app\Controllers;
+namespace Tests\Cli\Commands\app\Controllers;
 
-use Framework\MVC\Controller;
-use Framework\Routing\Attributes\Origin;
+use Aplus\Mvc\Controller;
+use Aplus\Routing\Attributes\Origin;
 
 #[Origin('https://no-routes.com')]
 class NoRoutes extends Controller

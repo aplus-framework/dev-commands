@@ -7,11 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
-use Framework\CLI\Command;
-use Framework\MVC\App;
+use Aplus\Cli\Cli;
+use Aplus\Cli\Command;
+use Aplus\Mvc\App;
 use ReflectionMethod;
 
 /**
@@ -34,23 +34,23 @@ class Seed extends Command
     {
         // @phpstan-ignore-next-line
         $this->databaseInstance = $this->getConsole()->getOption('instance') ?? 'default';
-        CLI::write(
-            CLI::style('Database Instance:', 'yellow', formats: ['bold'])
+        Cli::write(
+            Cli::style('Database Instance:', 'yellow', formats: ['bold'])
             . ' ' . $this->databaseInstance
         );
-        CLI::newLine();
+        Cli::newLine();
         $start = \microtime(true);
         $this->runSeeder();
         $end = \microtime(true);
-        CLI::newLine();
-        CLI::write('Total time of ' . \round($end - $start, 6) . ' seconds.');
+        Cli::newLine();
+        Cli::write('Total time of ' . \round($end - $start, 6) . ' seconds.');
     }
 
     protected function runSeeder() : void
     {
         $class = $this->getConsole()->getArgument(0);
         if (empty($class)) {
-            CLI::error('First argument must be a class name.');
+            Cli::error('First argument must be a class name.');
         }
         $class = new $class(App::database($this->databaseInstance));
         $method = new ReflectionMethod($class, 'runSeed');

@@ -7,12 +7,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Tests\CLI\Commands;
+namespace Tests\Cli\Commands;
 
-use Framework\Config\Config;
-use Framework\Database\Database;
-use Framework\Database\Definition\Table\TableDefinition;
-use Framework\Testing\TestCase;
+use Aplus\Config\Config;
+use Aplus\Database\Database;
+use Aplus\Database\Definition\Table\TableDefinition;
+use Aplus\Testing\TestCase;
 
 abstract class DatabaseTestCase extends TestCase
 {

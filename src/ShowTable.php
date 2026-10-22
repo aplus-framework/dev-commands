@@ -7,9 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
+use Aplus\Cli\Cli;
 use stdClass;
 
 /**
@@ -26,8 +26,8 @@ class ShowTable extends DatabaseCommand
         $this->setDatabase();
         $table = $this->console->getArgument(0);
         if (empty($table)) {
-            $table = CLI::prompt('Enter a table name');
-            CLI::newLine();
+            $table = Cli::prompt('Enter a table name');
+            Cli::newLine();
         }
         if (\str_contains($table, '.')) {
             [$schema, $table] = \explode('.', $table, 2);
@@ -37,28 +37,28 @@ class ShowTable extends DatabaseCommand
             'SHOW TABLES LIKE ' . $this->getDatabase()->quote($table)
         )->fetchArray();
         if (empty($show)) {
-            CLI::beep();
-            CLI::error('Table not exist: ' . $table);
+            Cli::beep();
+            Cli::error('Table not exist: ' . $table);
             return;
         }
         $fields = $this->getFields($table);
-        CLI::write(
-            CLI::style('Table: ', 'white')
-            . CLI::style($table, 'yellow')
+        Cli::write(
+            Cli::style('Table: ', 'white')
+            . Cli::style($table, 'yellow')
         );
-        CLI::table($fields, \array_keys($fields[0]));
-        CLI::newLine();
+        Cli::table($fields, \array_keys($fields[0]));
+        Cli::newLine();
         $indexes = $this->getIndexes($table);
         if ($indexes) {
-            CLI::write('Indexes', 'white');
-            CLI::table($indexes, \array_keys($indexes[0]));
-            CLI::newLine();
+            Cli::write('Indexes', 'white');
+            Cli::table($indexes, \array_keys($indexes[0]));
+            Cli::newLine();
         }
         $foreignKeys = $this->getForeignKeys($table);
         if ($foreignKeys) {
-            CLI::write('Foreign Keys', 'white');
-            CLI::table($foreignKeys, \array_keys($foreignKeys[0]));
-            CLI::newLine();
+            Cli::write('Foreign Keys', 'white');
+            Cli::table($foreignKeys, \array_keys($foreignKeys[0]));
+            Cli::newLine();
         }
     }
 

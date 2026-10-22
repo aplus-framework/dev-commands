@@ -7,9 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Tests\CLI\Commands\Seeds;
+namespace Tests\Cli\Commands\Seeds;
 
-use Framework\Database\Extra\Seeder;
+use Aplus\Database\Extra\Seeder;
 
 class AppSeeder extends Seeder
 {

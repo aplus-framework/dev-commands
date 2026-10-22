@@ -7,9 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
+use Aplus\Cli\Cli;
 
 /**
  * Class Query.
@@ -25,24 +25,24 @@ class Query extends DatabaseCommand
         $this->setDatabase();
         $query = $this->console->getArgument(0);
         if (empty($query)) {
-            $query = CLI::prompt('Query');
+            $query = Cli::prompt('Query');
         }
-        CLI::write(
-            CLI::style('Query: ', 'white') . CLI::style($query, 'yellow')
+        Cli::write(
+            Cli::style('Query: ', 'white') . Cli::style($query, 'yellow')
         );
         try {
             $result = $this->getDatabase()->query($query);
         } catch (\Exception $exception) {
-            CLI::beep();
-            CLI::error($exception->getMessage());
+            Cli::beep();
+            Cli::error($exception->getMessage());
             return;
         }
         $result = $result->fetchArrayAll();
         if (empty($result)) {
-            CLI::write('No results.');
+            Cli::write('No results.');
             return;
         }
-        CLI::table($result, \array_keys($result[0]));
-        CLI::write('Total: ' . \count($result));
+        Cli::table($result, \array_keys($result[0]));
+        Cli::write('Total: ' . \count($result));
     }
 }

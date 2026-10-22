@@ -7,9 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
+use Aplus\Cli\Cli;
 
 /**
  * Class MigrateTo.
@@ -24,7 +24,7 @@ class MigrateTo extends AbstractMigration
     {
         $version = $this->getConsole()->getArgument(0);
         if ($version === null) {
-            $version = CLI::prompt('Version');
+            $version = Cli::prompt('Version');
         }
         $this->runMigration('to', $version);
     }

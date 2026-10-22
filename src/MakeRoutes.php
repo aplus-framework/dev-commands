@@ -7,13 +7,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
-use Framework\CLI\Command;
-use Framework\MVC\App;
-use Framework\Routing\Reflector;
-use Framework\Routing\RouteActions;
+use Aplus\Cli\Cli;
+use Aplus\Cli\Command;
+use Aplus\Mvc\App;
+use Aplus\Routing\Reflector;
+use Aplus\Routing\RouteActions;
 use ReflectionClass;
 
 /**
@@ -38,19 +38,19 @@ class MakeRoutes extends Command
         $contents = $this->getFileContents();
         if ($filepath !== null) {
             if (!$this->console->getOption('o') && \is_file($filepath)) {
-                $prompt = CLI::prompt('File already exists. Overwrite?', ['y', 'n']);
+                $prompt = Cli::prompt('File already exists. Overwrite?', ['y', 'n']);
                 if ($prompt !== 'y') {
-                    CLI::write('Aborted.');
+                    Cli::write('Aborted.');
                     return;
                 }
             }
-            CLI::liveLine('Putting contents in ' . CLI::style($filepath, 'yellow') . '...');
+            Cli::liveLine('Putting contents in ' . Cli::style($filepath, 'yellow') . '...');
             \file_put_contents($filepath, $contents);
-            CLI::liveLine('Contents written in ' . CLI::style($filepath, 'yellow') . '.', true);
+            Cli::liveLine('Contents written in ' . Cli::style($filepath, 'yellow') . '.', true);
         }
         if ($filepath === null || $this->console->getOption('s')) {
-            CLI::write('File contents:', 'green');
-            CLI::write($contents);
+            Cli::write('File contents:', 'green');
+            Cli::write($contents);
         }
     }
 

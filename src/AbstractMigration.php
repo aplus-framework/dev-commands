@@ -7,11 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
-use Framework\CLI\Command;
-use Framework\MVC\App;
+use Aplus\Cli\Cli;
+use Aplus\Cli\Command;
+use Aplus\Mvc\App;
 
 /**
  * Class AbstractMigration.
@@ -33,25 +33,25 @@ abstract class AbstractMigration extends Command
             $arg = (int) $arg;
         }
         $method = 'migrate' . $direction;
-        CLI::write(
-            CLI::style('Migrator Instance:', 'yellow', formats: ['bold'])
+        Cli::write(
+            Cli::style('Migrator Instance:', 'yellow', formats: ['bold'])
             . ' ' . $this->migratorInstance
         );
-        CLI::newLine();
+        Cli::newLine();
         $count = 0;
         $time = $start = \microtime(true);
         foreach (App::migrator($this->migratorInstance)->{$method}($arg) as $item) {
-            CLI::write('- Migrated to ' . CLI::style($item, 'green')
-                . ' in ' . CLI::style((string) \round(\microtime(true) - $time, 6), 'yellow') . ' seconds.');
+            Cli::write('- Migrated to ' . Cli::style($item, 'green')
+                . ' in ' . Cli::style((string) \round(\microtime(true) - $time, 6), 'yellow') . ' seconds.');
             $time = \microtime(true);
             $count++;
         }
         if ($count) {
-            CLI::newLine();
-            CLI::write('Ran ' . $count . ' migration' . ($count !== 1 ? 's' : '')
+            Cli::newLine();
+            Cli::write('Ran ' . $count . ' migration' . ($count !== 1 ? 's' : '')
                 . ' in ' . \round(\microtime(true) - $start, 6) . ' seconds.');
             return;
         }
-        CLI::write('Did not run any migration.');
+        Cli::write('Did not run any migration.');
     }
 }

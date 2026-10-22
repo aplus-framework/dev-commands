@@ -7,11 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
-use Framework\CLI\Command;
-use Framework\MVC\App;
+use Aplus\Cli\Cli;
+use Aplus\Cli\Command;
+use Aplus\Mvc\App;
 
 /**
  * Class MigrationVersion.
@@ -30,9 +30,9 @@ class MigrationVersion extends Command
         $this->migratorInstance = $this->getConsole()->getOption('instance') ?? 'default';
         $name = App::migrator($this->migratorInstance)->getLastMigrationName();
         if ($name !== null) {
-            CLI::write($name);
+            Cli::write($name);
             return;
         }
-        CLI::write('No migration.');
+        Cli::write('No migration.');
     }
 }

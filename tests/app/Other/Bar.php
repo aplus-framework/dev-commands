@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Tests\CLI\Commands\app\Other;
+namespace Tests\Cli\Commands\app\Other;
 
-use Framework\MVC\Controller;
-use Framework\Routing\Attributes\RouteNotFound;
+use Aplus\Mvc\Controller;
+use Aplus\Routing\Attributes\RouteNotFound;
 
 class Bar extends Controller
 {

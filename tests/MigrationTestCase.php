@@ -7,9 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Tests\CLI\Commands;
+namespace Tests\Cli\Commands;
 
-use Framework\Database\Extra\Migrator;
+use Aplus\Database\Extra\Migrator;
 
 abstract class MigrationTestCase extends DatabaseTestCase
 {

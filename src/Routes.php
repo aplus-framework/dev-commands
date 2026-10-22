@@ -7,11 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
-use Framework\CLI\Command;
-use Framework\MVC\App;
+use Aplus\Cli\Cli;
+use Aplus\Cli\Command;
+use Aplus\Mvc\App;
 
 /**
  * Class Routes.
@@ -32,16 +32,16 @@ class Routes extends Command
         if ($instance !== null) {
             $this->routerInstance = $instance;
         }
-        CLI::write(
-            CLI::style('Router Instance:', 'yellow', formats: ['bold'])
+        Cli::write(
+            Cli::style('Router Instance:', 'yellow', formats: ['bold'])
             . ' ' . $this->routerInstance
         );
-        CLI::newLine();
+        Cli::newLine();
         $data = $this->collectData();
         $count = \count($data);
         $this->showCollectionsSet($count);
         foreach ($data as $index => $collection) {
-            CLI::write(CLI::style('Route Collection ' . ($index + 1), 'yellow', formats: ['bold']));
+            Cli::write(Cli::style('Route Collection ' . ($index + 1), 'yellow', formats: ['bold']));
             $this->writeHeader('Origin', $collection['origin']);
             if (isset($collection['name'])) {
                 $this->writeHeader('Name', $collection['name']);
@@ -51,13 +51,13 @@ class Routes extends Command
                 $this->writeHeader('Route Not Found', $collection['notFound']);
             }
             if ($collection['routes']) {
-                CLI::table(
+                Cli::table(
                     $collection['routes'],
                     ['#', 'Method', 'Path', 'Action', 'Name', 'Has Options']
                 );
             }
             if ($index + 1 < $count) {
-                CLI::newLine();
+                Cli::newLine();
             }
         }
     }
@@ -65,21 +65,21 @@ class Routes extends Command
     protected function showCollectionsSet(int $count) : void
     {
         if ($count === 0) {
-            CLI::write('No Route Collection has been set.', 'red');
+            Cli::write('No Route Collection has been set.', 'red');
             return;
         }
         $plural = $count > 1;
-        CLI::write(
+        Cli::write(
             'There ' . ($plural ? 'are' : 'is') . ' ' . $count
             . ' Route Collection' . ($plural ? 's' : '') . ' set:',
             'green'
         );
-        CLI::newLine();
+        Cli::newLine();
     }
 
     protected function writeHeader(string $field, string $value) : void
     {
-        CLI::write(CLI::style($field . ':', formats: ['bold']) . ' ' . $value);
+        Cli::write(Cli::style($field . ':', formats: ['bold']) . ' ' . $value);
     }
 
     /**

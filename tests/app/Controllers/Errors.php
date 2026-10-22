@@ -7,11 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Tests\CLI\Commands\app\Controllers;
+namespace Tests\Cli\Commands\app\Controllers;
 
-use Framework\MVC\Controller;
-use Framework\Routing\Attributes\Origin;
-use Framework\Routing\Attributes\RouteNotFound;
+use Aplus\Mvc\Controller;
+use Aplus\Routing\Attributes\Origin;
+use Aplus\Routing\Attributes\RouteNotFound;
 
 #[Origin('https://domain.tld')]
 #[Origin('https://blog.domain.tld')]

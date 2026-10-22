@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\CLI\Commands;
+namespace Aplus\Cli\Commands;
 
-use Framework\CLI\CLI;
-use Framework\Debug\Debugger;
+use Aplus\Cli\Cli;
+use Aplus\Debug\Debugger;
 
 /**
  * Class ListSchemas.
@@ -46,12 +46,12 @@ GROUP BY `TABLE_SCHEMA`';
             }
         }
         unset($schema);
-        CLI::table($schemas, [
+        Cli::table($schemas, [
             'Schema',
             'Collation',
             'Tables',
             'Size',
         ]);
-        CLI::write('Total: ' . \count($schemas));
+        Cli::write('Total: ' . \count($schemas));
     }
 }
